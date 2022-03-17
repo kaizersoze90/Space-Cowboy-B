@@ -15,6 +15,13 @@ public class PlayerControl : MonoBehaviour
     Vector2 minBounds;
     Vector2 maxBounds;
 
+    Shooter shooter;
+
+    void Awake()
+    {
+        shooter = GetComponent<Shooter>();
+    }
+
     void Start()
     {
         InitBounds();
@@ -32,11 +39,6 @@ public class PlayerControl : MonoBehaviour
         maxBounds = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
     }
 
-    void OnMove(InputValue value)
-    {
-        rawInput = value.Get<Vector2>();
-        Debug.Log(rawInput);
-    }
 
     void Move()
     {
@@ -46,4 +48,18 @@ public class PlayerControl : MonoBehaviour
         newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + bottomPadding, maxBounds.y - topPadding);
         transform.position = newPos;
     }
+
+    void OnMove(InputValue value)
+    {
+        rawInput = value.Get<Vector2>();
+    }
+
+    void OnFire(InputValue value)
+    {
+        if (shooter != null)
+        {
+            shooter.isFiring = value.isPressed;
+        }
+    }
+
 }
