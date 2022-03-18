@@ -12,6 +12,28 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip damagedClip;
     [SerializeField][Range(0f, 1f)] float damagedVolume = 1f;
 
+
+    static AudioPlayer instance;
+
+    private void Awake()
+    {
+        ManageSingleton();
+    }
+
+    void ManageSingleton()
+    {
+        if (instance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     public void PlayShootingSFX()
     {
         if (shootingClip != null)

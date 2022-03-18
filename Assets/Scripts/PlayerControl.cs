@@ -5,11 +5,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
+    [Header("Power Up")]
+    [SerializeField] GameObject bigLaserPrefab;
+    [SerializeField] GameObject cannonLaserPrefab;
+    [SerializeField] AudioClip starPowerUpSFX;
+    [SerializeField] AudioClip laserPowerUpSFX;
+    [SerializeField] float fireRateUpgradeAmount = 0.05f;
+    [SerializeField] float moveSpeedBoostAmount = 0.05f;
+
+    [Header("Player Control")]
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float leftPadding;
     [SerializeField] float rightPadding;
     [SerializeField] float topPadding;
     [SerializeField] float bottomPadding;
+
+    bool isBigLaserActive = false;
+    bool isCannonLaserActive = false;
+
 
     Vector2 rawInput;
     Vector2 minBounds;
@@ -59,6 +72,59 @@ public class PlayerControl : MonoBehaviour
         if (shooter != null)
         {
             shooter.isFiring = value.isPressed;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "PowerUp")
+        {
+            UpgradeLaser();
+            BoostFireRate();
+            BoostSpeed();
+            AudioSource.PlayClipAtPoint(starPowerUpSFX, Camera.main.transform.position);
+            Destroy(other.gameObject);
+        }
+    }
+
+    void BoostFireRate()
+    {
+        if (shooter != null)
+        {
+            shooter.baseFireRate -= fireRateUpgradeAmount;
+            shooter.baseFireRate = Mathf.Clamp(shooter.baseFireRate, 0.0001f, float.MaxValue);
+        }
+    }
+
+    void BoostSpeed()
+    {
+        moveSpeed += moveSpeedBoostAmount;
+        moveSpeed = Mathf.Clamp(moveSpeed, 1f, 10f);
+    }
+
+    void UpgradeLaser()
+    {
+        if (shooter != null)
+        {
+            float x = shooter.baseFireRate;
+            if (0.19f <= x && x <= 0.24f)
+            {
+                if (!isBigLaserActive)
+                {
+                    AudioSource.PlayClipAtPoint(laserPowerUpSFX, Camera.main.transform.position);
+                    isBigLaserActive = true;
+                }
+                shooter.projectilePrefab = bigLaserPrefab;
+            }
+            else if (x < 0.19f)
+            {
+                if (!isCannonLaserActive)
+                {
+                    AudioSource.PlayClipAtPoint(laserPowerUpSFX, Camera.main.transform.position);
+                    isCannonLaserActive = true;
+                }
+                shooter.projectilePrefab = cannonLaserPrefab;
+            }
         }
     }
 

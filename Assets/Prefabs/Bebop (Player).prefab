@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e22d14b0e77995d49a33329f14b6bbd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -214,11 +214,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018bac7b536b3184dbfb30d7dd748763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  bigLaserPrefab: {fileID: 1450774388343528264, guid: 842be05567d820643a715e5a8e37531f, type: 3}
+  cannonLaserPrefab: {fileID: 2176828933290204471, guid: be8d3b1ddb5cb9741aedff186a2351e4, type: 3}
+  starPowerUpSFX: {fileID: 8300000, guid: 962bc254e08c6ec42969c608a50d5551, type: 3}
+  laserPowerUpSFX: {fileID: 8300000, guid: ce0d6ee5adec6b542b04659cd056bebd, type: 3}
+  fireRateUpgradeAmount: 0.005
+  moveSpeedBoostAmount: 0.2
+  moveSpeed: 5
   leftPadding: 0.5
   rightPadding: 0.5
-  topPadding: 4
-  bottomPadding: 1
+  topPadding: 2
+  bottomPadding: 2
 --- !u!114 &3107081638689258987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,10 +254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd85b96b106d2f943ae840326021b0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3997588435935573093, guid: 070637742e6db814aad13369d2471fa9, type: 3}
   projectileSpeed: 10
   projectileLifetime: 5
-  baseFireRate: 0.1
+  baseFireRate: 0.3
+  projectilePrefab: {fileID: 3997588435935573093, guid: 070637742e6db814aad13369d2471fa9, type: 3}
   useAI: 0
   fireRateVariance: 0
   minFireRate: 0.1
