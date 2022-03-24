@@ -16,12 +16,13 @@ public class Shooter : MonoBehaviour
     [SerializeField] float fireRateVariance = 0.2f;
     [SerializeField] float minFireRate = 0.1f;
 
+
     [HideInInspector] public bool isFiring;
 
     Coroutine fireCoroutine;
     AudioPlayer audioPlayer;
 
-    private void Awake()
+    void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();
     }
@@ -69,4 +70,5 @@ public class Shooter : MonoBehaviour
             yield return new WaitForSeconds(fireRate);
         }
     }
+
 }

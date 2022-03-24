@@ -229,6 +229,7 @@ MonoBehaviour:
   baseFireRate: 5
   projectilePrefab: {fileID: 7955023284048689617, guid: a42427ebe6c84c140b3f8127145476bc, type: 3}
   useAI: 1
-  fireRateVariance: 2
+  fireRateVariance: 1
   minFireRate: 0.1
+  fireRateMultiplier: 0.01
   isFiring: 0

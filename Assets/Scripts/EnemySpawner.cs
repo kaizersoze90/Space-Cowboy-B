@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
 
     WaveConfigSO currentWave;
 
+    int waveIndex = 1;
+
     void Start()
     {
         StartCoroutine(SpawnEnemyWaves());
@@ -36,9 +38,15 @@ public class EnemySpawner : MonoBehaviour
                     yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
                 }
                 yield return new WaitForSeconds(timeBetweenWaves);
+                waveIndex++;
             }
         }
         while (isLooping);
+    }
+
+    public int GetCurrentWaveIndex()
+    {
+        return waveIndex;
     }
 
 }

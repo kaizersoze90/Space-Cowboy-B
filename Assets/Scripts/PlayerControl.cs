@@ -5,13 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
-    [Header("Power Up")]
+    [Header("PowerUp & HealthUp")]
     [SerializeField] GameObject bigLaserPrefab;
     [SerializeField] GameObject cannonLaserPrefab;
-    [SerializeField] AudioClip starPowerUpSFX;
+    [SerializeField] AudioClip powerUpSFX;
     [SerializeField] AudioClip laserPowerUpSFX;
     [SerializeField] float fireRateUpgradeAmount = 0.05f;
     [SerializeField] float moveSpeedBoostAmount = 0.05f;
+    [SerializeField] int healthBoostAmount = 20;
 
     [Header("Player Control")]
     [SerializeField] float moveSpeed = 2f;
@@ -29,10 +30,12 @@ public class PlayerControl : MonoBehaviour
     Vector2 maxBounds;
 
     Shooter shooter;
+    Health health;
 
     void Awake()
     {
         shooter = GetComponent<Shooter>();
+        health = GetComponent<Health>();
     }
 
     void Start()
@@ -82,7 +85,14 @@ public class PlayerControl : MonoBehaviour
             UpgradeLaser();
             BoostFireRate();
             BoostSpeed();
-            AudioSource.PlayClipAtPoint(starPowerUpSFX, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(powerUpSFX, Camera.main.transform.position);
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "HealthUp")
+        {
+            AudioSource.PlayClipAtPoint(powerUpSFX, Camera.main.transform.position);
+            BoostHealth();
             Destroy(other.gameObject);
         }
     }
@@ -100,6 +110,11 @@ public class PlayerControl : MonoBehaviour
     {
         moveSpeed += moveSpeedBoostAmount;
         moveSpeed = Mathf.Clamp(moveSpeed, 1f, 10f);
+    }
+
+    void BoostHealth()
+    {
+        health.IncreaseHealth(healthBoostAmount);
     }
 
     void UpgradeLaser()
@@ -127,5 +142,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
+
 
 }

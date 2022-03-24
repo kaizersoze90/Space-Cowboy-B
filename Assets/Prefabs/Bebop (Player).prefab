@@ -216,10 +216,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bigLaserPrefab: {fileID: 1450774388343528264, guid: 842be05567d820643a715e5a8e37531f, type: 3}
   cannonLaserPrefab: {fileID: 2176828933290204471, guid: be8d3b1ddb5cb9741aedff186a2351e4, type: 3}
-  starPowerUpSFX: {fileID: 8300000, guid: 962bc254e08c6ec42969c608a50d5551, type: 3}
+  powerUpSFX: {fileID: 8300000, guid: 962bc254e08c6ec42969c608a50d5551, type: 3}
   laserPowerUpSFX: {fileID: 8300000, guid: ce0d6ee5adec6b542b04659cd056bebd, type: 3}
   fireRateUpgradeAmount: 0.005
   moveSpeedBoostAmount: 0.2
+  healthBoostAmount: 20
   moveSpeed: 5
   leftPadding: 0.5
   rightPadding: 0.5

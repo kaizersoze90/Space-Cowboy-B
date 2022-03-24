@@ -17,6 +17,8 @@ public class Health : MonoBehaviour
     LevelManager levelManager;
     PowerUp powerUp;
 
+    int maxHealth;
+
     void Awake()
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
@@ -24,6 +26,11 @@ public class Health : MonoBehaviour
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         levelManager = FindObjectOfType<LevelManager>();
         powerUp = FindObjectOfType<PowerUp>();
+    }
+
+    void Start()
+    {
+        maxHealth = health;
     }
 
 
@@ -56,6 +63,7 @@ public class Health : MonoBehaviour
         {
             scoreKeeper.IncreaseScore(scoreValue);
             powerUp.SpawnPowerUp(transform.position);
+            powerUp.SpawnHealthUp(transform.position);
         }
         else
         {
@@ -84,5 +92,11 @@ public class Health : MonoBehaviour
     public int GetHealth()
     {
         return health;
+    }
+
+    public void IncreaseHealth(int value)
+    {
+        health += value;
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
 }

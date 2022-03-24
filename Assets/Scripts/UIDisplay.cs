@@ -14,10 +14,15 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     ScoreKeeper scoreKeeper;
 
+    [Header("Wave")]
+    [SerializeField] TextMeshProUGUI waveText;
+    EnemySpawner enemySpawner;
+
 
     void Awake()
     {
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     void Start()
@@ -29,5 +34,6 @@ public class UIDisplay : MonoBehaviour
     {
         scoreText.text = scoreKeeper.GetScore().ToString("000000");
         healthSlider.value = playerHealth.GetHealth();
+        waveText.text = "Wave " + enemySpawner.GetCurrentWaveIndex();
     }
 }
